@@ -1,0 +1,8 @@
+﻿  laserimd_kernel.cpp
+c:\users\andi\documents\cpp\laserimd_kernel\laserimd_kernel\laserimd_kernel.cpp(91): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  functions.cpp
+  Info: Boost.Config is older than your compiler version - probably nothing bad will happen - but you may wish to look for an update Boost version.  Define BOOST_CONFIG_SUPPRESS_OUTDATED_MESSAGE to suppress this message.
+c:\users\andi\documents\cpp\laserimd_kernel\laserimd_kernel\functions.cpp(212): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\andi\documents\cpp\laserimd_kernel\laserimd_kernel\functions.cpp(298): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+  laserimd_kernel.vcxproj -> C:\Users\andi\Documents\cpp\laserimd_kernel\x64\Debug\laserimd_kernel.exe
