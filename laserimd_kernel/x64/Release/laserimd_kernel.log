@@ -1,8 +1,6 @@
-﻿  laserimd_kernel.cpp
-laserimd_kernel.cpp(89): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Generating code
-  1 of 1329 functions ( 0.1%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    0 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  laserimd_kernel.vcxproj -> C:\Users\andi\Documents\cpp\laserimd_kernel\x64\Release\laserimd_kernel.exe
+﻿  stdafx.cpp
+  laserimd_kernel.cpp
+C:\Users\andi\Nextcloud\software\cpp\LaserIMD_kernel\laserimd_kernel\laserimd_kernel.cpp(89,27): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
+  functions.cpp
+  The contents of <filesystem> are available only with C++17 or later.
+C:\Users\andi\Nextcloud\software\cpp\LaserIMD_kernel\laserimd_kernel\functions.cpp(9,10): fatal  error C1083: Datei (Include) kann nicht geöffnet werden: "boost/algorithm/string.hpp": No such file or directory
