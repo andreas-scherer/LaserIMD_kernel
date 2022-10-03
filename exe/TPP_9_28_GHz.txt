@@ -1,0 +1,11 @@
+Px: 0.33
+Py: 0.41
+Pz: 0.26
+D: 1159 MHz
+E: -238 MHz
+wI: 9.279161 GHz
+grid_d: 200
+grid_t: grids_txt\\rep_3ang_12800pts.txt
+t_0: -0.1
+t_end: 3.5
+t_size: 15000
