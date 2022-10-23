@@ -1,5 +1,8 @@
 ﻿  functions.cpp
   The contents of <filesystem> are available only with C++17 or later.
-C:\Users\andi\Nextcloud\software\cpp\LaserIMD_kernel\laserimd_kernel\functions.cpp(235,21): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-C:\Users\andi\Nextcloud\software\cpp\LaserIMD_kernel\laserimd_kernel\functions.cpp(321,21): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
-  laserimd_kernel.vcxproj -> C:\Users\andi\Nextcloud\software\cpp\LaserIMD_kernel\x64\Debug\laserimd_kernel.exe
+C:\Users\andi\Nextcloud\software\cpp\LaserIMD_kernel\src\laserimd_kernel\functions.cpp(235,27): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\andi\Nextcloud\software\cpp\LaserIMD_kernel\src\laserimd_kernel\functions.cpp(321,20): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+  laserimd_kernel.cpp
+C:\Users\andi\Nextcloud\software\cpp\LaserIMD_kernel\src\laserimd_kernel\laserimd_kernel.cpp(108,27): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  Generating Code...
+  laserimd_kernel.vcxproj -> C:\Users\andi\Nextcloud\software\cpp\LaserIMD_kernel\src\x64\Debug\laserimd_kernel.exe

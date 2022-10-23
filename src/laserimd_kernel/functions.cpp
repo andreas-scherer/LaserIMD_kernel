@@ -47,7 +47,7 @@ std::tuple<std::vector<double>, std::vector<double>, std::vector<double>, std::v
 
 
 	std::ifstream fid(filename);
-	std::vector<double> alphas_t, betas_t, gammas_t, weights_t;
+	std::vector<double> alphas_T, betas_T, gammas_T, weights_T;
 
 
 	if (!fid) {
@@ -66,10 +66,10 @@ std::tuple<std::vector<double>, std::vector<double>, std::vector<double>, std::v
 				std::cerr << "The triplet grid should contain 4 entries per line and not " << strs.size() << ".\n";
 			}
 
-			alphas_t.push_back(std::stod(strs[0].c_str()));
-			betas_t.push_back(std::stod(strs[1].c_str()));
-			gammas_t.push_back(std::stod(strs[2].c_str()));
-			weights_t.push_back(std::stod(strs[3].c_str()));
+			alphas_T.push_back(std::stod(strs[0].c_str()));
+			betas_T.push_back(std::stod(strs[1].c_str()));
+			gammas_T.push_back(std::stod(strs[2].c_str()));
+			weights_T.push_back(std::stod(strs[3].c_str()));
 
 			std::getline(fid, tmp);
 		} while (fid);
@@ -77,7 +77,7 @@ std::tuple<std::vector<double>, std::vector<double>, std::vector<double>, std::v
 
 	}
 
-	return std::make_tuple(alphas_t, betas_t, gammas_t, weights_t);
+	return std::make_tuple(alphas_T, betas_T, gammas_T, weights_T);
 
 
 }
@@ -85,7 +85,7 @@ std::tuple<std::vector<double>, std::vector<double>, std::vector<double>, std::v
 
 
 
-void load_parameters(std::string file, double& Px, double& Py, double& Pz, double& D, double& E, double& wI, int& grid_d, std::string& grid_t, double& t_0, double& t_end, int& t_size) {
+void load_parameters(std::string file, double& Px, double& Py, double& Pz, double& D, double& E, double& omega_T, int& pts_grid_dip, std::string& grid_T, double& x_0, double& x_end, int& x_pts) {
 
 	std::ifstream fid(file);
 
@@ -101,7 +101,7 @@ void load_parameters(std::string file, double& Px, double& Py, double& Pz, doubl
 
 	try {
 		if (matches_Px.size() == 0) {
-			throw std::invalid_argument("no Px given in proper format");
+			throw std::invalid_argument("no zero-field population Px given in proper format");
 		}
 
 		Px = std::stod(matches_Px[1]);
@@ -125,7 +125,7 @@ void load_parameters(std::string file, double& Px, double& Py, double& Pz, doubl
 
 	try {
 		if (matches_Py.size() == 0) {
-			throw std::invalid_argument("no Py given in proper format");
+			throw std::invalid_argument("no zero-field population Py given in proper format");
 		}
 
 		Py = std::stod(matches_Py[1]);
@@ -145,7 +145,7 @@ void load_parameters(std::string file, double& Px, double& Py, double& Pz, doubl
 
 	try {
 		if (matches_Pz.size() == 0) {
-			throw std::invalid_argument("no Pz given in proper format");
+			throw std::invalid_argument("no zero-field population Pz given in proper format");
 		}
 
 		Pz = std::stod(matches_Pz[1]);
@@ -165,7 +165,7 @@ void load_parameters(std::string file, double& Px, double& Py, double& Pz, doubl
 
 	try {
 		if (matches_D.size() == 0) {
-			throw std::invalid_argument("no D given in proper format");
+			throw std::invalid_argument("no ZFS-value D given in proper format");
 		}
 
 		D = std::stod(matches_D[1]);
@@ -186,7 +186,7 @@ void load_parameters(std::string file, double& Px, double& Py, double& Pz, doubl
 
 	try {
 		if (matches_E.size() == 0) {
-			throw std::invalid_argument("no E given in proper format");
+			throw std::invalid_argument("no ZFS-value E given in proper format");
 		}
 
 		E = std::stod(matches_E[1]);
@@ -202,17 +202,17 @@ void load_parameters(std::string file, double& Px, double& Py, double& Pz, doubl
 	
 									   
 	// Load wI
-	std::smatch matches_wI;
-	std::regex wI_regexp("wI:[ ]+([\\d\\.]*)");
+	std::smatch matches_omega_T;
+	std::regex omega_T_regexp("omega_T:[ ]+([\\d\\.]*)");
 
-	std::regex_search(str, matches_wI, wI_regexp);
+	std::regex_search(str, matches_omega_T, omega_T_regexp);
 
 	try {
-		if (matches_wI.size() == 0) {
-			throw std::invalid_argument("no Larmor frequency given in proper format");
+		if (matches_omega_T.size() == 0) {
+			throw std::invalid_argument("no Zeeman frequency omega_T given in proper format");
 		}
 
-		wI = std::stod(matches_wI[1]);
+		omega_T = std::stod(matches_omega_T[1]);
 
 
 	}
@@ -222,17 +222,17 @@ void load_parameters(std::string file, double& Px, double& Py, double& Pz, doubl
 	}
 
 	// Load grid_d
-	std::smatch matches_grid_d;
-	std::regex grid_d_regexp("grid_d:[ ]+([\\d\\.]*)");
+	std::smatch matches_pts_grid_dip;
+	std::regex pts_grid_dip_regexp("pts_grid_dip:[ ]+([\\d\\.]*)");
 
-	std::regex_search(str, matches_grid_d, grid_d_regexp);
+	std::regex_search(str, matches_pts_grid_dip, pts_grid_dip_regexp);
 
 	try {
-		if (matches_grid_d.size() == 0) {
+		if (matches_pts_grid_dip.size() == 0) {
 			throw std::invalid_argument("no grid for the dipolar vector in proper format");
 		}
 
-		grid_d = std::stod(matches_grid_d[1]);
+		pts_grid_dip = std::stod(matches_pts_grid_dip[1]);
 
 
 	}
@@ -243,17 +243,17 @@ void load_parameters(std::string file, double& Px, double& Py, double& Pz, doubl
 
 
 	// Load grid_t
-	std::smatch matches_grid_t;
-	std::regex grid_t_regexp("grid_t:[ ]+([a-zA-Z\\.\\\\_\\d]*)");
+	std::smatch matches_grid_T;
+	std::regex grid_T_regexp("grid_T:[ ]+([a-zA-Z\\.\\\\_\\d]*)");
 
-	std::regex_search(str, matches_grid_t, grid_t_regexp);
+	std::regex_search(str, matches_grid_T, grid_T_regexp);
 
 	try {
-		if (matches_grid_t.size() == 0) {
+		if (matches_grid_T.size() == 0) {
 			throw std::invalid_argument("no grid for the triplet in proper format");
 		}
 
-		grid_t = matches_grid_t[1];
+		grid_T = matches_grid_T[1];
 
 
 	}
@@ -266,17 +266,17 @@ void load_parameters(std::string file, double& Px, double& Py, double& Pz, doubl
 
 
 	// Load t_0
-	std::smatch matches_t_0;
-	std::regex t_0_regexp("t_0:[ ]+([-\\d\\.]*)");
+	std::smatch matches_x_0;
+	std::regex x_0_regexp("x_0:[ ]+([-\\d\\.]*)");
 
-	std::regex_search(str, matches_t_0, t_0_regexp);
+	std::regex_search(str, matches_x_0, x_0_regexp);
 
 	try {
-		if (matches_t_0.size() == 0) {
-			throw std::invalid_argument("no grid for the dipolar vector given in proper format");
+		if (matches_x_0.size() == 0) {
+			throw std::invalid_argument("no x_0 given in proper format");
 		}
 
-		t_0 = std::stod(matches_t_0[1]);
+		x_0 = std::stod(matches_x_0[1]);
 
 
 	}
@@ -287,17 +287,17 @@ void load_parameters(std::string file, double& Px, double& Py, double& Pz, doubl
 
 
 	// Load t_end
-	std::smatch matches_t_end;
-	std::regex t_end_regexp("t_end:[ ]+([\\d\\.]*)");
+	std::smatch matches_x_end;
+	std::regex x_end_regexp("x_end:[ ]+([\\d\\.]*)");
 
-	std::regex_search(str, matches_t_end, t_end_regexp);
+	std::regex_search(str, matches_x_end, x_end_regexp);
 
 	try {
-		if (matches_t_end.size() == 0) {
-			throw std::invalid_argument("no t_end given in proper format");
+		if (matches_x_end.size() == 0) {
+			throw std::invalid_argument("no x_end given in proper format");
 		}
 
-		t_end = std::stod(matches_t_end[1]);
+		x_end = std::stod(matches_x_end[1]);
 
 
 	}
@@ -308,17 +308,17 @@ void load_parameters(std::string file, double& Px, double& Py, double& Pz, doubl
 
 
 	// Load n_t
-	std::smatch matches_t_size;
-	std::regex t_size_regexp("t_size:[ ]+([\\d\\.]*)");
+	std::smatch matches_x_pts;
+	std::regex x_pts_regexp("x_pts:[ ]+([\\d\\.]*)");
 
-	std::regex_search(str, matches_t_size, t_size_regexp);
+	std::regex_search(str, matches_x_pts, x_pts_regexp);
 
 	try {
-		if (matches_t_size.size() == 0) {
-			throw std::invalid_argument("no n_t given in proper format");
+		if (matches_x_pts.size() == 0) {
+			throw std::invalid_argument("no x_pts given in proper format");
 		}
 
-		t_size = std::stod(matches_t_size[1]);
+		x_pts = std::stod(matches_x_pts[1]);
 
 
 	}

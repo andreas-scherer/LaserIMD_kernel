@@ -3,9 +3,9 @@ Py: 0.41
 Pz: 0.26
 D: 1159 MHz
 E: -238 MHz
-wI: 9.3 GHz
-grid_d: 200
-grid_t: grids\\rep_3ang_12800pts.txt
-t_0: -0.1
-t_end: 3.5
-t_size: 15000
+omega_T: 9.3 GHz
+pts_grid_dip: 200
+grid_T: grids\\rep_3ang_12800pts.txt
+x_0: -0.1
+x_end: 3.5
+x_pts: 15000
