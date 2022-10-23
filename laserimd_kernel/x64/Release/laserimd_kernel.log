@@ -1,6 +1,0 @@
-﻿  stdafx.cpp
-  laserimd_kernel.cpp
-C:\Users\andi\Nextcloud\software\cpp\LaserIMD_kernel\laserimd_kernel\laserimd_kernel.cpp(89,27): warning C4267: "Initialisierung": Konvertierung von "size_t" nach "int", Datenverlust möglich
-  functions.cpp
-  The contents of <filesystem> are available only with C++17 or later.
-C:\Users\andi\Nextcloud\software\cpp\LaserIMD_kernel\laserimd_kernel\functions.cpp(9,10): fatal  error C1083: Datei (Include) kann nicht geöffnet werden: "boost/algorithm/string.hpp": No such file or directory
