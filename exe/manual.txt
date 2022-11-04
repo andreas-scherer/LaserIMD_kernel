@@ -1,20 +1,22 @@
 To use the program laserimd_kernel.exe follow these steps:
 
-1) 	Create a file PARAMETER_FILE.txt that contains that specifies the parameters
-	that are necessary for the calculation of the kernel such as:
+1) 	Create a file PARAMETER_FILE.txt that contains the parameters
+	that are necessary for the calculation of the kernel:
 	-the zero-field populations Px, Py and Pz
 	-the zero-field splitting values D and E
-	-the Zeeman frequency of the triplet wT
+	-the Zeeman frequency of the triplet omega_T
 	-the number of points of the dipolar grids. We recommend 200 points.
-	-the file form which grid of the triplet label is loaded. It should be a comma separated 
+	-a file which containes the grid of the triplet label. It should be a comma separated 
 	 .txt file with 4 columns. The first, second and third contain the values of the Euler angles
  	 alpha_T, beta_T and gamma_T and the fourth one contains the corresponding weights weights_T.
  	 We recommend the grid 'rep_3ang_12800pts.txt' in the 'example/grids' folder.
 	-the lower and upper values x_0 and x_end and the number of points x_pts to specifiy the
-	 x-values for which the Kernel shall be calculated. They can be obtained as follows.
+	 x-values for which the Kernel shall be calculated. The x-values should fulffill the following
+	 requirements:
 	 For a kernel K(t,r) with the time-axis t and the distance axis r, 
-	 x_end must be larger than t[end]/r[0]^-3. The stepsize of x should be reasonably small 
- 	 to fir to the timesteps of t.
+	 x_end must be larger than t[end]/r[0]^-3. x_0 can be set to 0, if all data points of the LaserIMD
+	 trace before the zero-time are removed. The number of x-points should be so high that the stepsize 
+	 of x is smaller than (t[1]-t[0])/r[0]^-3.
 
 2)	For the calculation of S_{LaserIMD}^{non-sec} use the program 'laserimd_kernel.exe' from
   	the command line and type in:
@@ -22,9 +24,8 @@ To use the program laserimd_kernel.exe follow these steps:
  	The calculation may take a while. Once finished two .bin files will be created: 
 	KERNEL_FILE_x.bin and KERNEL_FILE_y.bin.
 
-3) 	For the generation of the final LaserIMD kernel, the binary files need to be loaded with python
- 	with the function by using the python code. 
-	K(t,r)=laserimd_kernel(t,r, KERNEL_FILE, lam=1, B=None)
-	The function is provided in the file 'laserimd.py'. 
-	There an example, how the thus generated kernel can be used to analyze LaserIMd data
-	in combination with the Deerlab (version 0.13.2).
+3) 	For the generation of the final LaserIMD kernel K_{LaserIMD}^{non-sec}, the binary files need to be 
+  	loaded with python with the function 'laserimd_kernel' in 'laserimd.py':
+	K(t,r)=laserimd_kernel(t,r, KERNEL_FILE, lam=1, B=None) 
+	In the folder 'examples', the script 'distance_analysis.py' gives an example how the thus generated
+	kernel can be used to analyze LaserIMD data in combination with the Deerlab (version 0.13.2).

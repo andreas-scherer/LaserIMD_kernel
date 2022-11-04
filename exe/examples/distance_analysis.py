@@ -70,14 +70,18 @@ data = np.loadtxt(filename)
 t=data[:,0]
 V=data[:,1]
 
-
+#Preprocessing:
 
 t0=0.2176
 t=t-t0
-
 V = V[t>=0]
 t = t[t>=0]
+cutoff = 1.4
+V = V[t<cutoff]
+t = t[t<cutoff]
 
+
+# Generate the Kernel
 r=np.linspace(1.5,5,1024)
 
 K=laserimd_kernel(t,r, 'TPP_9_28_GHz')
@@ -93,6 +97,7 @@ def laserimdmodel(p):
     return Kb
 
 
+#define the limits for the fir routine
 par0 = [0.5, dl.bg_exp.start[0] ] # Start values
 lb   = [ 0, dl.bg_exp.lower[0]] # lower bounds
 ub   = [ 1, dl.bg_exp.upper[0]] # upper bounds
