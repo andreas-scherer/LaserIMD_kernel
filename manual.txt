@@ -1,0 +1,34 @@
+To use the program laserimd_kernel.exe follow these steps:
+
+1) 	Create a file PARAMETER_FILE.txt that contains the parameters
+	that are necessary for the calculation of the kernel:
+	-the zero-field populations Px, Py and Pz
+	-the zero-field splitting values D and E
+	-the Zeeman frequency of the triplet omega_T
+	-the number of points of the dipolar grids. We recommend 200 points.
+	-a file which containes the grid of the triplet label. It should be a comma separated 
+	 .txt file with 4 columns. The first, second and third contain the values of the Euler angles
+ 	 alpha_T, beta_T and gamma_T and the fourth one contains the corresponding weights weights_T.
+	 It must be stored in a folder 'grids' which is in the same directory.
+ 	 We recommend the grid 'rep_3ang_12800pts.txt' in the 'example/grids' folder.
+	-if the kernel K(t,r) shall be calculated for a distance axis r and a time axis t that range from
+  	 r_0 to r_end and t_0 to t_end, t and r must be transferred to a new axis x. This axis is specified by
+	 the first value x_0, the last value x_end and the number of points x_size. The axis x must fullfil the
+	 following conditions: x_end must be larger than t_end/r_0^-3. x_0 can be set to 0, if all data points 
+	 of the LaserIMD trace before the zero-time are removed. The number of x-points should be so high that 
+	 the stepsize of x is smaller than (t_1-t_0)/r_0^-3, t_1 is the second value of t.
+	 The axis x is created with equally spaced points.
+
+2)	For the calculation of S_{LaserIMD}^{non-sec} use the program 'laserimd_kernel.exe' from
+  	the command line and type in:
+	"laserimd_kernel.exe PARAMETER_FILE.txt KERNEL_FILE"
+	KERNEL_FILE is the name that you choose for the output files.
+ 	Two .bin files will be created: KERNEL_FILE_x.bin and KERNEL_FILE_y.bin. 
+	The calculation may take a while. 
+
+3) 	For the application of the LaserIMD kernel K_{LaserIMD}^{non-sec}, the binary files need to be 
+  	loaded with python with the function 'laserimd_kernel' in 'laserimd.py' in the folder 'exe':
+	K(t,r)=laserimd_kernel(t,r, KERNEL_FILE, lam=x, B=y), with the modulation depth lam and
+	the background B set to user defined values x and y.
+	The script 'distance_analysis.py' in the folder 'exe/examples' gives an example how the 
+	kernel can be used to analyze LaserIMD data in combination with Deerlab (version 0.13.2).
